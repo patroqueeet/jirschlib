@@ -43,3 +43,11 @@ let g:pymode_lint_options_pylint = {'max-line-length': g:pymode_options_max_line
 " shortcuts
 nmap j <Esc>:tabprev<CR>
 nmap k <Esc>:tabnext<CR>
+
+" js folding https://github.com/pangloss/vim-javascript
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+augroup javascript_folding
+  au!
+  au FileType javascript setlocal foldmethod=syntax
+augroup END
