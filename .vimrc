@@ -9,6 +9,10 @@ call pathogen#helptags()
 filetype plugin indent on
 syntax on
 
+" folding for coffee and two spaces default intendation
+autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent
+autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+
 " http://stackoverflow.com/questions/1523482/vimrc-configuration-for-python
 autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 " https://stackoverflow.com/questions/13787475/automatic-headers-when-opening-a-new-python-file-with-vim
