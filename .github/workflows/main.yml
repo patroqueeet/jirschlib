@@ -1,0 +1,30 @@
+name: IAC
+on: [push]
+jobs:
+  # test:
+  #   ...
+  deploy:
+    name: "Deploy to IAC PROD"
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    # needs: test
+    steps:
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/iac.key
+          chmod 600 ~/.ssh/iac.key
+          cat >>~/.ssh/config <<END
+          Host iac
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/iac.key
+            StrictHostKeyChecking no
+          END
+        env:
+          SSH_USER: ${{ secrets.iac_SSH_USER }}
+          SSH_KEY: ${{ secrets.iac_SSH_KEY }}
+          SSH_HOST: ${{ secrets.iac_SSH_HOST }}
+
+      - name: Update PROD Munin
+        run: ssh iac 'cd iac/munin; git pull; docker-compose stop; docker-compose up -d'
