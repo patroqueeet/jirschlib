@@ -27,4 +27,5 @@ jobs:
           SSH_HOST: ${{ secrets.iac_SSH_HOST }}
 
       - name: Update PROD Munin
-        run: ssh iac 'cd iac/munin; git pull; docker-compose stop; docker-compose up -d'
+        # run: ssh iac 'cd iac/munin; git pull; docker-compose stop; docker-compose up -d'
+        run: cat ~/.ssh/config
