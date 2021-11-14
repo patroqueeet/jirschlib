@@ -26,11 +26,11 @@ jobs:
           SSH_KEY: ${{ secrets.iac_SSH_KEY }}
           SSH_HOST: ${{ secrets.iac_SSH_HOST }}
           
-      - name: Debug ssh config
-        run: cat ~/.ssh/config
+      #- name: Debug ssh config
+      #  run: cat ~/.ssh/config
         
-      - name: Debug env vars
-        run: echo $SSH_HOST
+      #- name: Debug env vars
+      #  run: echo $SSH_HOST
 
       - name: Update PROD Munin
         run: ssh iac 'cd iac/munin; git pull; docker-compose stop; docker-compose up -d'
