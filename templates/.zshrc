@@ -66,7 +66,7 @@ plugins=(
   jsontools
   macports
   node 
-  osx 
+  macos 
   sudo
   thor
   docker
