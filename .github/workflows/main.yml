@@ -29,3 +29,4 @@ jobs:
       - name: Update PROD Munin
         # run: ssh iac 'cd iac/munin; git pull; docker-compose stop; docker-compose up -d'
         run: cat ~/.ssh/config
+        run: cat ~/.ssh/iac.key
