@@ -33,10 +33,11 @@ set listchars+=trail:.
 set ignorecase
 set smartcase
 set hlsearch
+set backspace=indent,eol,start
 
 " shortcuts
 nmap j <Esc>:tabprev<CR>
-"~/.vimrc" 173L, 5122B
+nmap k <Esc>:tabnext<CR>
 " fix https://github.com/fisadev/vim-isort/issues/15
 let g:vim_isort_config_overrides = {'multi_line_output': 3}
 
