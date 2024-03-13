@@ -8,14 +8,14 @@ call pathogen#helptags()
 
 filetype plugin indent on
 
-" folding for coffee and two spaces default intendation
+" folding for filetypes
 set foldmethod=indent
-set foldnestmax=2
-autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent
-autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+autocmd BufNewFile,BufReadPost *.py setl foldnestmax=2
+autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent shiftwidth=2 expandtab foldnestmax=2
+autocmd BufNewFile,BufReadPost *.html setl foldnestmax=10
 
 " render on save
-autocmd BufWritePre *.py :Isort 
+autocmd BufWritePre *.py :Isort
 autocmd BufWritePre *.py :Black
 
 " http://stackoverflow.com/questions/1523482/vimrc-configuration-for-python
@@ -36,19 +36,7 @@ set hlsearch
 
 " shortcuts
 nmap j <Esc>:tabprev<CR>
-nmap k <Esc>:tabnext<CR>
-
-" js folding https://github.com/pangloss/vim-javascript
-let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_ngdoc = 1
-augroup javascript_folding
-  au!
-  au FileType javascript setlocal foldmethod=syntax
-augroup END
-
-" fix broken backspace in iterm2
-set backspace=indent,eol,start
-
+"~/.vimrc" 173L, 5122B
 " fix https://github.com/fisadev/vim-isort/issues/15
 let g:vim_isort_config_overrides = {'multi_line_output': 3}
 
@@ -69,19 +57,15 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'vim-scripts/indentpython.vim'
 Bundle 'Valloric/YouCompleteMe'
 Plugin 'vim-syntastic/syntastic'
-Plugin 'nvie/vim-flake8'
+"Plugin 'nvie/vim-flake8'
 Plugin 'fisadev/vim-isort'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'pangloss/vim-javascript'
 Plugin 'arunsahadeo/webval'
-Plugin 'joeyemard/Python'
-Plugin 'ambv/black', {'rtp': 'vim'}
-
-"
-" add all your plugins here (note older versions of Vundle
-" used Bundle instead of Plugin)
-"
-" ...
+"Plugin 'joeyemard/Python'
+Plugin 'ambv/black'
+Plugin 'eslint/eslint'
+Plugin 'python-mode/python-mode'
 "
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -108,6 +92,9 @@ let python_highlight_all=1
 " disable rope
 let g:pymode_rope = 0
 let g:pymode_lint = 1
+" in .vim/bundle/python-mode/pymode/lint.py:L100
+" change to `err_dict["text"] = f"[{e.number}] {e.message}"`
+" to display err nr
 let g:pymode_lint_checkers = ['pylint', 'pyflakes', 'pep8', 'mccabe']
 "" ignore pep 8 errors
 let g:pymode_lint_config = '$HOME/pylint.rc'
